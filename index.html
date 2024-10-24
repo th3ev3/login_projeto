@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AndCont</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Verifique o caminho do favicon -->
+    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="public/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Bem-vindo à Intranet da AndCont</h2>
+        <p>Por favor, insira suas credenciais para acessar a plataforma.</p>
+        <form id="loginForm" action="/login" method="POST">
+            <input type="text" placeholder="Digite seu nome" id="username" name="username" required aria-label="Nome de usuário">
+            <input type="password" placeholder="Digite sua senha" id="password" name="password" required aria-label="Senha">
+            <button type="submit">Entrar</button>
+        </form>
+        <p><a href="#" id="forgot-password">Esqueceu sua senha?</a></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
