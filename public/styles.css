@@ -1,0 +1,79 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('intranet.png');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.85); /* Fundo branco translúcido */
+    padding: 40px 60px;
+    border-radius: 20px; /* Bordas mais suaves */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Sombra mais profunda e suave */
+    text-align: center;
+    max-width: 400px; /* Largura maior para espaçamento */
+    transition: transform 0.3s ease; /* Transição suave ao carregar */
+}
+
+.login-container:hover {
+    transform: scale(1.02); /* Pequeno aumento ao passar o mouse */
+}
+
+
+h1 {
+    font-size: 26px;
+    color: #296c94;
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: 1px; /* Espaçamento nas letras para um toque moderno */
+    text-transform: uppercase; /* Letras maiúsculas para destacar o título */
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombras internas */
+    transition: border 0.3s ease;
+}
+
+input:focus {
+    border-color: #296c94; /* Cor ao focar */
+    outline: none;
+    box-shadow: 0 0 5px rgba(41, 108, 148, 0.5); /* Efeito de brilho ao focar */
+}
+
+button {
+    background-color: #296c94;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(41, 108, 148, 0.3); /* Sombra para o botão */
+}
+
+button:hover {
+    background-color: #3b8bb8;
+    transform: translateY(-3px); /* Efeito de levantar o botão ao passar o mouse */
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
