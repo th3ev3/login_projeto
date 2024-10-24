@@ -1,5 +1,5 @@
 const express = require('express');
-const fs = require('fs');
+const fs = require('fs').promises; // Usar a versão promissificada do fs
 const path = require('path');
 const bodyParser = require('body-parser');
 
@@ -21,21 +21,23 @@ app.use(bodyParser.json());
 app.use(express.static('public')); // Servir arquivos estáticos da pasta "public"
 
 // Rota de login
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   console.log('Tentativa de login:', { username, password });
 
+  // Verificar se username e password foram informados
   if (!username || !password) {
     console.log('Usuário ou senha não informados');
     return res.status(401).send('Usuário ou senha não informados');
   }
 
+  // Verificar se o usuário existe e se a senha está correta
   if (username in users) {
     console.log('Usuário encontrado:', username);
     if (users[username] === password) {
       console.log('Senha correta');
-      logLogin(username);
-      return res.status(200).send({ message: 'Login bem-sucedido' }); // Resposta de sucesso
+      await logLogin(username); // Aguarda o registro do login
+      return res.status(200).send({ message: 'Login bem-sucedido' });
     } else {
       console.log('Senha incorreta');
       return res.status(401).send('Senha incorreta');
@@ -47,23 +49,18 @@ app.post('/login', (req, res) => {
 });
 
 // Função para registrar o login
-function logLogin(username) {
+async function logLogin(username) {
   const data = new Date();
-  const dia = String(data.getDate()).padStart(2, '0');
-  const mes = String(data.getMonth() + 1).padStart(2, '0');
-  const ano = data.getFullYear();
-  const hora = String(data.getHours()).padStart(2, '0');
-  const minutos = String(data.getMinutes()).padStart(2, '0');
-  const segundos = String(data.getSeconds()).padStart(2, '0');
+  const formattedDate = `${String(data.getDate()).padStart(2, '0')}/${String(data.getMonth() + 1).padStart(2, '0')}/${data.getFullYear()} ${String(data.getHours()).padStart(2, '0')}:${String(data.getMinutes()).padStart(2, '0')}:${String(data.getSeconds()).padStart(2, '0')}`;
 
-  const logMessage = `${dia}/${mes}/${ano} ${hora}:${minutos}:${segundos} - Usuário ${username} fez login\n`;
+  const logMessage = `${formattedDate} - Usuário ${username} fez login\n`;
   const logPath = path.join(__dirname, 'login.log');
 
-  fs.appendFile(logPath, logMessage, (err) => {
-    if (err) {
-      console.error('Erro ao registrar login:', err);
-    }
-  });
+  try {
+    await fs.appendFile(logPath, logMessage); // Aguarda a escrita do log
+  } catch (err) {
+    console.error('Erro ao registrar login:', err);
+  }
 }
 
 // Rota home
